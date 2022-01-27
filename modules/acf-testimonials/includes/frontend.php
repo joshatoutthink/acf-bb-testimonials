@@ -36,7 +36,7 @@ $testimonials = get_field($settings->testi_repeater_field);
 		<div class="fl-testimonial">
 
 		<?php if($has_image): ?>
-			<div><img src="<?php echo $image; ?>" alt="<?php echo $name; ?>"/>
+			<div><img src="<?php echo $image; ?>" alt="<?php echo $name; ?>"/></div>
 		<?php endif; ?>
 
 			<blockquote>
