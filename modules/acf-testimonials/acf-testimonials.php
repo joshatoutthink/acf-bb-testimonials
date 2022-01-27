@@ -1,8 +1,7 @@
 <?php
 
 class ACFTestimonialsModule extends FLBuilderModule {
-
-	/**
+/**
 	 * @method __construct
 	 */
 	public function __construct() {
