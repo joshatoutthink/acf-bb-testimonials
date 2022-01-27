@@ -11,13 +11,37 @@
 define( 'TESTI_BB_DIR', plugin_dir_path( __FILE__ ) );
 define( 'TESTI_BB_URL', plugins_url( '/', __FILE__ ) );
 
-require_once TESTI_BB_DIR . 'stubs.php';//DELETE WHEN DONE
 
 function load_acf_testimonials(){
-	if ( class_exists('FLBuilder') ) {
-		require_once TESTI_BB_DIR . 'modules/acf-testimonials/acf-testimonials.php';
+	$bb_exists = class_exists('FLBuilder');
+	$acf_exists = class_exists( 'acf_field_repeater' );
+
+if ( $bb_exists && $acf_exists ) {
+	require_once TESTI_BB_DIR . 'modules/acf-testimonials/acf-testimonials.php';
+} else {
+		add_action('admin_notices', 'missing_plugin_notice');	
 	}
 }
 
-add_action('init','load_acf_testimonials');
+function missing_plugin_notice(){
+	$bb_exists = class_exists('FLBuilder');
+	$acf_exists = class_exists( 'acf_field_repeater' );
+	//Gets the error message to display
+	$missing_plugin = "";
+	if( $bb_exists == $acf_exists  ){
+		$missing_plugin =	"Need to add beaverbuilder and ACF Pro"; 
+	} elseif ( $bb_exists > $acf_exists ){
+			$missing_plugin = "Need to add ACF"; 
+	}else{
+		$missing_plugin = "Need to add Beaver Builder";
+	}
 
+
+	?>
+	<div class="notice notice-warning is-dismissible">
+			<p><?php echo $missing_plugin; ?></p>
+	</div>
+	<?php
+}
+
+add_action('init','load_acf_testimonials');

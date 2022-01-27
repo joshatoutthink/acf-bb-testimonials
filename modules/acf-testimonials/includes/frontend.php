@@ -8,7 +8,6 @@ if ( '' == $settings->heading && 'compact' == $settings->layout ) {
 
 $testimonials = get_field($settings->testi_repeater_field);
 
-
 ?>
 <div class="<?php echo $testimonials_class; ?>">
 
